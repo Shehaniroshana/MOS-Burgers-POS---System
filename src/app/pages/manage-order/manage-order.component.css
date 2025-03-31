@@ -1,0 +1,4 @@
+.active {
+  color: #f87171; /* Tailwind's red-400 */
+  border-bottom: 2px solid #f87171;
+}

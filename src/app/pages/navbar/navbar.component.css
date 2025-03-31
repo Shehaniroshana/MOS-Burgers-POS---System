@@ -1,0 +1,7 @@
+.Active {
+   color: #e43f16;
+}
+
+nav a:hover:not(.active) {
+  
+}

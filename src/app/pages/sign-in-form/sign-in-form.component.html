@@ -1,0 +1,54 @@
+<h2 class="text-2xl font-semibold text-white mb-6 tracking-tight">Crew Login</h2>
+
+<!-- Form Fields -->
+<div class="space-y-6">
+    <!-- Email -->
+    <div>
+        <label class="block text-sm text-gray-200 mb-2 font-medium">Crew Email</label>
+        <div class="relative">
+            <input type="email" placeholder="crew@mosburger.com"
+                class="w-full p-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-red-500 transition-all duration-200 hover:bg-slate-950"
+                #Email>
+            <i class="fas fa-envelope absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+        </div>
+    </div>
+
+    <!-- Password -->
+    <div>
+        <label class="block text-sm text-gray-200 mb-2 font-medium">Password</label>
+        <div class="relative">
+            <input [type]="isPasswordVisible ? 'text' : 'password'" placeholder="••••••••"
+                class="w-full p-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-red-500 transition-all duration-200 hover:bg-slate-950"
+                #password>
+            <i class="fas absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 cursor-pointer"
+                [ngClass]="isPasswordVisible ? 'fa-eye' : 'fa-eye-slash'" (click)="togglePassword()"></i>
+        </div>
+    </div>
+</div>
+
+<!-- Options -->
+<div class="flex items-center justify-between mt-5">
+    <div class="flex items-center space-x-2">
+        <input type="checkbox"
+            class="w-4 h-4 bg-gray-700 border-gray-600 rounded text-red-500 focus:ring-0 cursor-pointer">
+        <label class="text-sm text-gray-300">Stay logged in</label>
+    </div>
+    <a class="text-sm text-red-400 hover:underline">Forgot Password?</a>
+</div>
+
+<!-- Submit Button -->
+<div class="mt-6">
+    <button
+        class="w-full bg-slate-950 text-white py-3 rounded-xl font-semibold active:bg-gradient-to-r from-slate-900 to-red-600 shadow-black shadow-2xl"
+        (click)="logIn(Email.value,password.value)">
+        Log In to POS
+    </button>
+</div>
+
+<!-- Footer -->
+<div class="mt-6 text-center">
+    <p class="text-xs text-gray-500">Secured by MOS Burger Systems</p>
+    <p class="text-xs text-gray-500 mt-1">
+        Need assistance? <a href="#" class="text-red-400 hover:underline">Contact Support</a>
+    </p>
+</div>

@@ -1,0 +1,163 @@
+<!-- Main Page Structure -->
+<div class="flex flex-col md:flex-row justify-center items-stretch h-full text-gray-100">
+
+  <!-- Left Side - Food Items -->
+  <div class="overflow-y-auto w-full md:w-2/3 h-full p-4">
+
+    <!-- Header -->
+    <h1 class="text-2xl font-extrabold text-gray-100 text-[2em] mb-2 ps-2">MOS Burgers</h1>
+    <h2 class="mb-6 text-gray-400 ps-3">{{date}}</h2>
+
+    <div class="items-center bg-slate-950 rounded-2xl">
+
+      <!-- Search Bar -->
+      <div class="flex items-center space-x-2 p-3 bg-slate-950 rounded-2xl">
+        <input 
+          #searchInput 
+          type="text" 
+          class="w-full text-white bg-transparent placeholder-gray-400 focus:outline-none"
+          placeholder="Search here...." 
+          (input)="search_Order(searchInput.value)"
+        >
+        <button class="text-gray-200 hover:text-white" (click)="search_Order(searchInput.value)">
+          <i class="bi bi-search"></i>
+        </button>
+      </div>
+
+      <!-- Search result -->
+      <div *ngIf="searchOrderList.length > 0" class="w-full h-40 overflow-y-auto p-4 space-y-5 bg-slate-950 rounded-b-2xl">
+        <div 
+          *ngFor="let order of searchOrderList"
+          class="bg-card bg-gradient-to-r from-black to-slate-800 shadow-lg rounded-xl flex items-center w-full p-3 hover:bg-card-hover transition-all duration-300 mt-3"
+        >
+          <i class="bi bi-cart-check-fill text-[20px]"></i>  
+          <div class="flex-1 ml-3">
+            <p class="text-sm font-bold text-green-600">{{ order.customerName }}</p>
+            <p class="text-xs mt-1"> Date :{{order.orderDate}}</p>        
+            <p class="text-xs flex items-center">
+              <span class="text-red-200">{{ order.status }}</span>
+              <span class="text-blue-500 font-bold ml-2">Rs.{{ order.totalAmount }}</span>
+            </p>
+            <div class="text-xs text-gray-300">
+              <span *ngFor="let item of order.itemDetails; let isLast=last">
+                {{ item.itemName }}{{ isLast ? '' : ', ' }}
+              </span>
+            </div>
+          </div>
+      
+          <div class="flex space-x-2">
+            <button 
+              class="text-[16px] text-green-200 animate-bounce"
+            >
+            <i class="bi bi-pencil-square"></i>
+            </button>
+            <button class="text-[16px] text-red-400">
+              <i class="bi bi-x-circle"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Navbar -->
+    <div class="flex flex-wrap gap-4 ps-2 mt-5">
+      <button 
+        *ngFor="let status of ['All', 'Pending', 'Delivered', 'Cancelled']"
+        class="px-4 py-2 text-gray-200 border-b-2 transition-colors duration-200"
+        [ngClass]="{'border-red-500 border-b-2': activeStatus === status}"
+        (click)="loadOrderDetails(status)"
+      >
+        {{status}}
+      </button>
+    </div>
+
+    <!-- Item List -->
+    <table class="min-w-full text-sm mt-9 bg-slate-900 rounded-2xl">
+      <thead>
+        <tr class="text-gray-400 text-sm uppercase tracking-wide">
+          <th class="py-2 px-6 text-left">Order</th>
+          <th class="py-2 px-6 text-left">Date</th>
+          <th class="py-2 px-6 text-left">Customer</th>
+          <th class="py-2 px-6 text-left">Status</th>
+          <th class="py-2 px-6 text-left">Order Items</th>
+          <th class="py-2 px-6 text-left">Total Amount</th>
+          <th class="py-2 px-6 text-left">Action</th>
+        </tr>
+      </thead>
+      <tbody class="text-sm">
+        <tr *ngFor="let order of Orders" class="border-t border-gray-700 transition duration-200">
+          <td class="py-4 px-6 text-red-500">#{{ order.id }}</td>
+          <td class="py-4 px-6 text-gray-200">{{ order.orderDate }}</td>
+          <td class="py-4 px-6 text-gray-200">{{ order.customerName }}</td>
+          <td class="py-4 px-6">
+            <span class="rounded-full px-3 py-1 text-xs"
+              [ngClass]="{
+                'text-yellow-300 bg-yellow-800 bg-opacity-60': order.status === 'Pending',
+                'text-green-300 bg-green-900 bg-opacity-60': order.status === 'Delivered',
+                'text-red-300 bg-red-900 bg-opacity-60': order.status === 'Cancelled'
+
+              }">
+              {{ order.status }}
+            </span>
+          </td>
+          <td class="py-4 px-6 text-gray-200">
+            <div>
+              <p *ngFor="let detail of order.itemDetails">{{ detail.quantity }}x {{ detail.itemName }}</p>
+            </div>
+          </td>
+          <td class="py-4 px-6 text-gray-200">Rs. {{ order.totalAmount.toFixed(2) }}</td>
+          <td class="py-4 px-6 text-gray-200">
+            <button class="text-red-400 hover:text-red-600 transition duration-200 text-lg"  
+            (click)="delete_order(order.id)"
+            ><i class="bi bi-trash"></i></button>
+          
+            <button 
+            class="text-lg text-green-400 hover:text-green-600 ps-5 transition duration-200"
+            (click)="update_status(order.id, order.status)"
+            >
+              <i class="bi bi-pencil-square"></i>
+            </button>
+          </td>
+        </tr>
+        <tr *ngIf="Orders.length === 0" class="border-t border-gray-700">
+          <td colspan="7" class="py-4 px-6 text-gray-200 text-center">No orders found.</td>
+        </tr>
+      </tbody>
+    </table>
+
+
+  </div>
+
+  <!-- Right Side - Order Section -->
+<div class="bg-gray-900 overflow-y-auto w-full md:w-1/3 h-full p-4">
+  <h1 class="text-2xl font-bold text-white mb-4 text-center">Manage Order Details!</h1>
+
+
+
+     <!-- Dashboard Card 1: Total Orders -->
+  <div class="bg-gray-800 rounded-lg p-3 mb-4 shadow-md flex justify-between items-center">
+    <div>
+      <h2 class="text-lg font-semibold text-white">Total Orders</h2>
+      <p class="text-gray-300 text-sm">{{activeStatus}}</p>
+    </div>
+    <p class="text-2xl font-bold text-blue-400">{{Orders.length}}</p>
+  </div>
+
+ 
+
+
+  <!-- Dashboard Card 5: Best Customers List -->
+  <div class="bg-gray-800 rounded-lg p-3 mb-4 shadow-md overflow-y-auto h-50">
+    <h2 class="text-lg font-semibold text-white mb-2">Best Customers</h2>
+    <ul *ngFor="let customer of bestCustomerList" class="text-gray-300 text-sm">
+      <li class="flex justify-between py-1">
+        <span>{{ customer.customerName }}</span>
+        <span class="text-gray-300">Rs.{{ customer.totalAmount.toFixed(2) }}</span>
+      </li>
+    </ul>
+  </div>
+
+</div>
+
+</div>

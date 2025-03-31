@@ -1,0 +1,74 @@
+<h2 class="text-2xl font-semibold text-white mb-6 tracking-tight">Crew Registration</h2>
+
+<!-- Form Fields -->
+<div class="space-y-6">
+    <!-- Full Name -->
+    <div>
+        <div class="relative">
+            <input type="text" placeholder="Full Name" 
+                   class="w-full p-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-red-500 transition-all duration-200 hover:bg-slate-950"
+                   #fullName>
+            <i class="fas fa-user absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+        </div>
+    </div>
+
+    <!-- Email -->
+    <div>
+        <div class="relative">
+            <input type="email" placeholder="Email : crew@mosburger.com" 
+                   class="w-full p-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-red-500 transition-all duration-200 hover:bg-slate-950"
+                   #email>
+            <i class="fas fa-envelope absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+        </div>
+    </div>
+
+    <!-- Role -->
+    <div>
+        <div class="relative">
+            <select class="appearance-none w-full p-[11px] bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-red-500 transition-all duration-200 hover:bg-slate-950"
+             #role
+            >
+                <option value="" disabled selected>Select your role</option>
+                <option *ngFor="let option of ['Admin', 'Cashier','Manager']" value="{{option}}">{{option}}</option>
+            </select>
+            <i class="fas fa-briefcase absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+        </div>
+    </div>
+
+    <!-- Password -->
+    <div>
+        <div class="relative">
+            <input [type]="isPasswordVisible ? 'text': 'password'" placeholder="Password" 
+                   class="w-full p-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-red-500 transition-all duration-200 hover:bg-slate-950"
+                   #password
+                   >
+            <i class="fas fa-lock absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" (click)="togglePassword()" [ngClass]="isPasswordVisible ? 'fa-eye' : 'fa-eye-slash'" ></i>
+        </div>
+    </div>
+
+    <!-- Confirm Password -->
+    <div>
+        <div class="relative">
+            <input type="password" placeholder="Confirm Password" 
+                   class="w-full p-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-red-500 transition-all duration-200 hover:bg-slate-950"
+                   #confirmPassword>
+            <i class="fas fa-lock absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+        </div>
+    </div>
+</div>
+
+<!-- Submit Button -->
+<div class="mt-6">
+    <button class="w-full bg-slate-950 text-white py-3 rounded-xl font-semibold active:bg-gradient-to-r from-slate-900 to-red-600 shadow-black shadow-2xl"
+    (click)="register(fullName.value,email.value,role.value,password.value,confirmPassword.value)">
+        Register
+    </button>
+</div>
+
+<!-- Footer -->
+<div class="mt-6 text-center">
+    <p class="text-xs text-gray-500">Secured by MOS Burger Systems</p>
+    <p class="text-xs text-gray-500 mt-1">
+        Need assistance? <a href="#" class="text-red-400 hover:underline">Contact Support</a>
+    </p>
+</div>

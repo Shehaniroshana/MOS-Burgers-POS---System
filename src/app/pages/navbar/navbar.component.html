@@ -1,0 +1,44 @@
+<div class="flex h-screen bg-slate-950">
+  <!-- Sidebar -->
+  <div class="w-20 bg-slate-950 text-white flex flex-col items-center py-4">
+    <!-- Logo/Icon -->
+    <div class="w-16 h-16 bg-gray-800 items-center flex justify-center rounded-full mb-10">
+      <img src="logo/logo.png" alt="" class="w-12 p-2 ">
+    </div>
+    <nav class="flex-1 flex flex-col items-center gap-6 text-[20px]">
+
+      <a class="bg-gradient-to-t from-gray-800 to-gray-900 rounded-full w-12 h-12 flex items-center justify-center"
+        routerLink="/navbar/" routerLinkActive="Active" [routerLinkActiveOptions]="{ exact: true }">
+        <i class="bi bi-house-door-fill"></i>
+      </a>
+
+      <a class="bg-gradient-to-t from-gray-800 to-gray-900 rounded-full w-12 h-12 flex items-center justify-center"
+        routerLink="/navbar/placeorder" routerLinkActive="Active">
+        <i class="bi bi-bag-check-fill"></i>
+      </a>
+      <a class="bg-gradient-to-t from-gray-800 to-gray-900 rounded-full w-12 h-12 flex items-center justify-center"
+        routerLink="/navbar/orders" routerLinkActive="Active">
+        <i class="bi bi-bag-x"></i>
+      </a>
+      <a class="bg-gradient-to-t from-gray-800 to-gray-900 rounded-full w-12 h-12 flex items-center justify-center"
+        routerLink="/navbar/customer" routerLinkActive="Active">
+        <i class="bi bi-person-lines-fill"></i>
+      </a>
+      <a class="bg-gradient-to-t from-gray-800 to-gray-900 rounded-full w-12 h-12 flex items-center justify-center"
+        routerLink="/navbar/food-item-manage" routerLinkActive="Active">
+        <i class="fas fa-hamburger"></i>
+      </a>
+    </nav>
+    <!-- Footer -->
+    <div class="mt-auto text-[20px]">
+      <a class="bg-gradient-to-t from-gray-800 to-gray-900 rounded-full w-12 h-12 flex items-center justify-center"
+        routerLink="/navbar/sign-in">
+        <i class="fa fa-sign-out" aria-hidden="true"></i>
+      </a>
+    </div>
+  </div>
+  <div class="flex-1 p-0 m-0 overflow-y-auto bg-gradient-to-br from-gray-800 to-black ">
+    <router-outlet></router-outlet>
+  </div>
+
+</div>

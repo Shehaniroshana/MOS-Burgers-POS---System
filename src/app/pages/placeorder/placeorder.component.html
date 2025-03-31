@@ -1,0 +1,291 @@
+<!-- Main Page Structure -->
+<div
+  class="flex flex-col md:flex-row justify-center items-stretch h-full text-gray-100"
+>
+  <!-- Left Side - Food Items -->
+  <div class="overflow-y-auto w-full md:w-2/3 h-full p-4">
+    <!-- Header -->
+    <h1 class="text-2xl font-extrabold text-gray-100 text-[2em] mb-2 ps-2">
+      MOS Burgers
+    </h1>
+    <h2 class="mb-6 text-gray-400 ps-3">{{ date }}</h2>
+
+    <div class="items-center bg-slate-950 rounded-2xl">
+      <!-- Search Bar -->
+      <div class="flex items-center space-x-2 p-3 bg-slate-950 rounded-2xl">
+        <input
+          #searchInput
+          type="text"
+          class="w-full text-white bg-transparent placeholder-gray-400 focus:outline-none"
+          placeholder="Search here...."
+          (input)="search_Item(searchInput.value)"
+        />
+        <button
+          class="text-gray-200 hover:text-white"
+          (click)="search_Item(searchInput.value)"
+        >
+          <i class="bi bi-search"></i>
+        </button>
+      </div>
+
+      <!-- Search result -->
+      <div
+        *ngIf="items.length > 0 "
+        class="w-full h-40 overflow-y-auto p-4 space-y-5 bg-slate-950 rounded-b-2xl"
+      >
+        <div
+          *ngFor="let item of items"
+          class="bg-card bg-gradient-to-r from-black to-slate-800 shadow-lg rounded-xl flex items-center w-full p-3 hover:bg-card-hover transition-all duration-300 mt-3"
+        >
+          <img
+            src="{{ item.imagePath }}"
+            class="w-12 h-12 rounded-full object-cover"
+            alt="Burger"
+          />
+
+          <div class="flex-1 ml-3">
+            <p class="text-sm font-bold text-white">{{ item.name }}</p>
+            <p class="text-xs flex items-center">
+             <ng-container *ngIf="item.discount>0 else NoDiscount">
+               <span class="line-through text-gray-400"
+                >Rs.{{ item.price }}</span
+              >
+              <span class="text-yellow-400 font-bold ml-2"
+                >Rs.{{ item.price * (1 - item.discount / 100) }}</span
+              >
+             </ng-container>
+
+             <ng-template #NoDiscount>
+               <span class="text-yellow-400 font-bold">Rs.{{ item.price }}</span>
+             </ng-template>
+             
+              <ng-container *ngIf="item.discount > 0">
+                <span
+                  class="ml-2 bg-orange-600 text-green-100 text-xs px-2 py-0.5 rounded-full backdrop-hue-rotate-60 animate-pulse"
+                >
+                  {{ item.discount }}% OFF
+                </span>
+              </ng-container>
+            </p>
+          </div>
+
+          <div class="flex space-x-2">
+            
+            <ng-container *ngIf="item.qty > 0; else outOfStock">
+              <button
+              class="text-[16px] text-green-200 animate-bounce"
+              (click)="
+                add_to_cart(
+                  item.id,
+                  item.price,
+                  item.discount,
+                  1,
+                  item.name,
+                  item.imagePath
+                )
+              "
+            >
+              <i class="bi bi-bag-plus-fill"></i>
+            </button>
+            </ng-container>
+            <ng-template #outOfStock>
+                 <button class="text-[16px] text-red-500">
+                   <i class="bi bi-bag-x-fill"></i>
+                 </button>
+            </ng-template>
+            
+
+            <button
+              class="text-[16px] text-red-400"
+              (click)="remove_search_Item(item.id)"
+            >
+              <i class="bi bi-x-circle"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navbar -->
+    <div class="flex flex-wrap gap-4 ps-2 mt-5">
+      <button
+        *ngFor="
+          let category of [
+            'Burgers',
+            'Submarines',
+            'Fries',
+            'Pasta',
+            'Chicken',
+            'Beverages'
+          ]
+        "
+        class="px-4 py-2 text-gray-200 border-b-2 transition-colors duration-200"
+        [ngClass]="{ 'border-red-500 border-b-2': activeCategory === category }"
+        (click)="fetchByCategory(category)"
+      >
+        {{ category }}
+      </button>
+    </div>
+
+    <!-- Item List -->
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-4"
+    >
+      <div
+        *ngFor="let item of allItems"
+        class="bg-gray-800 rounded-3xl shadow-2xl shadow-black overflow-hidden flex flex-col"
+      >
+        <!-- Food item image -->
+        <img
+          src="{{ item.imagePath }}"
+          alt="Dish"
+          class="w-full h-28 object-cover p-2 rounded-3xl"
+        />
+
+        <!-- Food item details -->
+        <div class="p-3 text-gray-200 flex flex-col flex-grow">
+          <h3 class="text-lg font-semibold mb-1">{{ item.name }}</h3>
+          <p class="text-xs text-gray-300 mb-2">
+            {{ item.qty }} Items available
+          </p>
+
+          <!-- Price and discount -->
+          <div class="flex items-center gap-1 mb-2">
+            <div class="text-base font-medium text-yellow-400">
+              Rs.{{ item.price }}
+            </div>
+            <ng-container *ngIf="item.discount > 0">
+              <div
+                class="bg-red-500 text-[10px] font-medium text-white px-1 py-0.5 rounded-full animate-bounce"
+              >
+                {{ item.discount }}%
+              </div>
+            </ng-container>
+          </div>
+
+          <!-- Add to cart button -->
+          <ng-container *ngIf="item.qty > 0; else outOfStock">
+            <button
+              class="mt-auto bg-slate-950 bg-opacity-90 text-white text-sm font-medium py-1 px-2 rounded-lg active:bg-slate-800 transition-colors duration-200 shadow-gray-900 shadow-lg"
+              (click)="
+                add_to_cart(
+                  item.id,
+                  item.price,
+                  item.discount,
+                  1,
+                  item.name,
+                  item.imagePath
+                )
+              "
+            >
+              Add to Cart
+            </button>
+          </ng-container>
+          <ng-template #outOfStock>
+            <div class="flex justify-between items-center text-red-400">
+              <p>Out of Stock.</p>
+              <p class="text-red-500 text-[25px] animate-pulse">
+                <i class="bi bi-bag-x-fill"></i>
+              </p>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Side - Order Section -->
+  <div class="bg-gray-900 overflow-y-auto w-full md:w-1/3 h-full p-4">
+    <h1 class="text-2xl font-bold text-white mb-4 text-center">
+      Place Order Here!
+    </h1>
+
+    <select
+      [(ngModel)]="selectedCustomer"
+      class="w-full p-3 rounded-xl bg-gray-800 text-white placeholder:text-gray-400 mb-10"
+      (click)="getCustomerDetails()"
+    >
+      <option [ngValue]="null" selected>Customer ID</option>
+      <option *ngFor="let customer of CustomerIds" value="{{ customer }}">
+        Customer#{{ customer }}
+      </option>
+    </select>
+
+    <div class="space-y-2 mb-6 ml-4">
+      <h3 class="text-sm font-medium text-gray-300">
+        Customer Name: {{ CustomerName }}
+      </h3>
+      <h3 class="text-sm font-medium text-gray-300">
+        Loyalty Points: {{ CustomerLoyaltyPoints }}
+      </h3>
+    </div>
+
+    <!-- Scrollable Item List -->
+    <div class="w-full h-full overflow-y-auto p-4 space-y-5">
+      <!-- Cart items -->
+      <div
+        *ngFor="let items of cartItems"
+        class="bg-gray-800 text-white rounded-lg p-4 flex items-center gap-4 w-full shadow-2xl shadow-black"
+      >
+        <img
+          src="{{ items.imagePath }}"
+          alt="Food Item"
+          class="w-12 h-12 rounded-full object-cover"
+        />
+
+        <div class="flex-1">
+          <div class="flex justify-between items-center">
+            <h3 class="text-sm font-medium truncate max-w-[150px]">
+              {{ items.name }}
+            </h3>
+            <span class="text-sm font-semibold">
+              Price: Rs.{{
+                (items.price - (items.price * items.discount) / 100) * items.qty
+                  | number : "1.2-2"
+              }}
+            </span>
+          </div>
+
+          <div class="flex justify-between items-center mt-1">
+            <span class="text-xs text-gray-400">
+              Discount: Rs.{{
+                (items.price * items.discount) / 100 | number : "1.2-2"
+              }}
+              ({{ items.discount }}% off)
+            </span>
+            <div
+              class="flex items-center bg-gray-700 rounded px-2 py-1 shadow-lg"
+            >
+              <span class="text-sm">Qty: {{ items.qty }}</span>
+            </div>
+          </div>
+
+          <p class="text-xs text-gray-400 mt-1">
+            Original Price: Rs.{{ items.price | number : "1.2-2" }} each
+          </p>
+        </div>
+
+        <button
+          class="text-red-500 hover:text-red-600"
+          (click)="removeItem(items.cart_id)"
+        >
+          <i class="bi bi-trash3-fill"></i>
+        </button>
+      </div>
+
+      <!-- Total price -->
+      <div class="mt-4 text-white" *ngIf="cartItems.length > 0">
+        <h3 class="text-lg font-semibold">
+          Total: Rs.{{ getTotalPrice() | number : "1.2-2" }}
+        </h3>
+      </div>
+
+      <button
+        class="bg-slate-950 text-white w-full text-sm font-medium py-2 px-4 rounded active:bg-slate-800 transition-colors duration-200 shadow-black shadow-lg"
+        (click)="placeOrder()"
+      >
+        Place Order
+      </button>
+    </div>
+  </div>
+</div>
