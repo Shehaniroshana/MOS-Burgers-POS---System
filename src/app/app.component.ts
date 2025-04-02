@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
-import { NavbarComponent } from "./pages/navbar/navbar.component";
-import { RouterOutlet } from '@angular/router';
-import { SignInComponent } from "./pages/sign-in/sign-in.component";
+import { RouterOutlet } from "@angular/router";
 
 @Component({
   selector: 'app-root',
-  imports: [NavbarComponent, RouterOutlet, SignInComponent,],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  imports: [RouterOutlet], // Correct module
+  templateUrl: "./app.component.html", // Use double quotes
+  styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
   title = 'MOS-Burgers-POS';

@@ -48,11 +48,11 @@ export class RegisterFormComponent {
           .then((response) => response.text())
           .then((result) =>{
             console.log(result);
-            if (result) {
+            if (result==='true') {
               Swal.fire('Success!', 'Registration successful', 'success');
               this.router.navigate(['/']);
             } else {
-              Swal.fire('Error!', 'Registration failed', 'error');
+              Swal.fire('Error!', 'Try another email this email is already registered', 'error');
             }
           })
           .catch((error) => console.error(error));

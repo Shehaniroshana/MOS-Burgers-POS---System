@@ -20,25 +20,36 @@ export class SignInFormComponent {
     this.isPasswordVisible = !this.isPasswordVisible;
   }
   logIn(email: string, password: string): void {
-
-    console.log(email,password);
-    if(email!=''&&password!=''){
-    fetch(`http://localhost:8080/mos/user/authenticateUser/${email}/${password}`)
-    .then((result)=>result.json())
-    .then((result)=>{
-           
-      if(result){
-        Swal.fire('Success!', 'Login successful', 'success');
-        this.router.navigate(['navbar']);
-      }else{
-        Swal.fire('Error!', 'Invalid email or password', 'error');
-      }
+    console.log(email, password);
+  
+    if (email !== '' && password !== '') {
+      const encodedEmail = encodeURIComponent(email);
+      const encodedPassword = encodeURIComponent(password);
       
-    })
-    
-  }else{
-    Swal.fire('Error!', 'Please enter email and password', 'error');
+      fetch(`http://localhost:8080/mos/user/authenticateUser/${encodedEmail}/${encodedPassword}`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(result => {
+          if (result === true || result === "true") { // Handle both boolean and string "true"
+            Swal.fire('Success!', 'Login successful', 'success');
+            this.router.navigate(['navbar']);
+          } else {
+            Swal.fire('Error!', 'Invalid email or password', 'error');
+          }
+        })
+        .catch(error => {
+          console.error('Login error:', error);
+          Swal.fire('Error!', 'Something went wrong', 'error');
+        });
+  
+    } else {
+      Swal.fire('Error!', 'Please enter email and password', 'error');
+    }
   }
-  }
+  
 
 }
