@@ -2,11 +2,14 @@ import { CommonModule } from '@angular/common';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { addCustomerService } from '../../Service/CustomerService';
+import { AddCustomerComponent } from "../add-customer/add-customer.component";
+import { BestCustomersComponent } from "../best-customers/best-customers.component";
 
 @Component({
   selector: 'app-manage-customer',
   standalone: true,
-  imports: [CommonModule, FormsModule,],
+  imports: [CommonModule, FormsModule, AddCustomerComponent, BestCustomersComponent],
   templateUrl: './customer.component.html',
   styleUrls: ['./customer.component.css']
 })
@@ -63,48 +66,13 @@ export class CustomerComponent {
   }
 
 
-  addCustomer(name:string,contact:string,points:string){
-    
-    let lp:number=Number.parseFloat(points);
-    let contactNo:number=Number.parseInt(contact);
-    if(name!="" && contact!="" && points!=""){
-      
-      if(contact.length==10 && lp>0){
-
-   fetch('http://localhost:8080/mos/customer/saveCustomer', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body:JSON.stringify({
-        "name": name,
-        "contact": String(contactNo),
-        "loyaltyPoints": lp
-      })
-    })
-    .then((response) => response.json())
-    .then((data)=>{
-      if(data){
-      Swal.fire("Success!","Customer added successfully!","success");  
-      this.updateComputedValues();
-      this.loadAllCustomers();
-                this.customerName.nativeElement.value = '';
-                this.contact.nativeElement.value = '';
-                this.points.nativeElement.value = '';
-                 
-      }else{
-        Swal.fire("Error!","something went wrong","error");
-      }
-    })
-
-      }else{
-        Swal.fire("Error!","Please enter a valid details!","error");
-      }
-  
-  }else{
-    Swal.fire("Error!","Please fill in all fields!","error");
-  }
-
+  async addCustomer(name:string,contact:string,points:string){   
+  await addCustomerService(name,contact,points)
+  this.updateComputedValues();
+  this.loadAllCustomers();
+              this.customerName.nativeElement.value = '';
+              this.contact.nativeElement.value = '';
+              this.points.nativeElement.value = '';
   }
 
   /**

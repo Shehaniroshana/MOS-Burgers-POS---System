@@ -148,15 +148,10 @@
 
 
   <!-- Dashboard Card 5: Best Customers List -->
-  <div class="bg-gray-800 rounded-lg p-3 mb-4 shadow-md overflow-y-auto h-50">
-    <h2 class="text-lg font-semibold text-white mb-2">Best Customers</h2>
-    <ul *ngFor="let customer of bestCustomerList" class="text-gray-300 text-sm">
-      <li class="flex justify-between py-1">
-        <span>{{ customer.customerName }}</span>
-        <span class="text-gray-300">Rs.{{ customer.totalAmount.toFixed(2) }}</span>
-      </li>
-    </ul>
+  <div class="bg-slate-800 rounded-lg p-3 mb-4 shadow-md overflow-y-auto h-50">
+    <app-best-customers></app-best-customers> 
   </div>
+
 
 </div>
 

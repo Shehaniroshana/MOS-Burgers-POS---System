@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { InventoryStatusComponent } from "../inventory-status/inventory-status.component";
 
 // item.ts
 interface Item {
@@ -41,7 +42,7 @@ interface itemDetails {
 @Component({
   selector: 'app-placeorder',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, InventoryStatusComponent],
   templateUrl: './placeorder.component.html',
   styleUrl: './placeorder.component.css',
 })

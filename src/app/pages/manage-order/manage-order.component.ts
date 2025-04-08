@@ -2,12 +2,14 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { loadBestCustomers } from '../../Service/DashboardService';
+import { BestCustomersComponent } from "../best-customers/best-customers.component";
 
 
 @Component({
   selector: 'app-manage-order',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, BestCustomersComponent],
   templateUrl: './manage-order.component.html',
   styleUrls: ['./manage-order.component.css']
 })
@@ -132,24 +134,10 @@ export class ManageOrderComponent {
 
   }
 
-  bestCustomerOrders : any[] = [];
+ 
   bestCustomerList: any[] = [];
-  loadBestCustomers() {
-    fetch('http://localhost:8080/order/getAllOrders')
-        .then((response) => response.json())
-        .then((data) => {
-
-            this.bestCustomerOrders = data.filter((order: { status: string }) => order.status !== 'Cancelled');
-            
-            this.bestCustomerOrders.sort((a, b) => b.totalAmount - a.totalAmount);
-            
-            console.log(this.bestCustomerOrders);
-            this.bestCustomerList = this.bestCustomerOrders;
-        })
-        .catch((error) => {
-            console.error('Error fetching order details:', error);
-            Swal.fire('Error!', 'Failed to load order details. Please try again.', 'error');
-        });
+  async loadBestCustomers() {
+   this.bestCustomerList=await loadBestCustomers()
  }
 
  

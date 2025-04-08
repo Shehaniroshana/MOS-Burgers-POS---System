@@ -3,11 +3,13 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { debounceTime, Subject } from 'rxjs';
+import { InventoryStatusComponent } from "../inventory-status/inventory-status.component";
+import { BestItemsComponent } from "../best-items/best-items.component";
 
 @Component({
   selector: 'app-food-item-manage',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, InventoryStatusComponent, BestItemsComponent],
   templateUrl: './food-item-manage.component.html',
   styleUrl: './food-item-manage.component.css'
 })
