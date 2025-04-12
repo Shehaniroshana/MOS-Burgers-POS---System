@@ -1,5 +1,6 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
+import { getRevenueByLast6Month } from '../../Service/DashboardService';
 
 Chart.register(...registerables);
 
@@ -9,6 +10,9 @@ Chart.register(...registerables);
   styleUrl: './revenue-chart.component.css'
 })
 export class RevenueChartComponent implements AfterViewInit {
+
+  RevenueByLast6Month = getRevenueByLast6Month();
+
   public config: any = {
     type: 'bar',
     data: {

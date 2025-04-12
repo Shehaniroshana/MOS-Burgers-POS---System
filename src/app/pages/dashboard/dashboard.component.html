@@ -18,73 +18,117 @@
     </header>
 
     <!-- Stats Grid -->
-    <div class="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-6 gap-4 md:gap-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 rounded-2xl">
+      <!-- Card 1: Total Revenue -->
       <div
-        class="p-4 md:p-6 rounded-3xl bg-slate-900 border border-gray-900 shadow-lg shadow-black transition-all duration-300 hover:bg-slate-950 animate-fade-up">
-        <p class="text-gray-400 text-xs md:text-sm font-medium">Total Revenue</p>
-        <p class="text-2xl md:text-3xl font-bold text-gray-300 mt-4">Rs : 152,340.80</p>
-        <div class="space-y-1 mt-2 text-xs">
-          <p class="text-red-500">Today: Rs. 45,230.10</p>
-          <p class="text-gray-600">Yesterday: Rs. 40,120.50</p>
-          <p class="text-green-500">+12.5% <i class="bi bi-arrow-up"></i></p>
+        class="relative p-5 md:p-7 rounded-2xl bg-slate-900 border border-slate-800 shadow-2xl shadow-black hover:bg-slate-950 animate-fade-up"
+      >
+        <div class="absolute top-0 right-0 w-10 h-10 bg-slate-600/20 rounded-full blur-lg"></div>
+        <div class="flex items-center justify-between gap-2 mb-7">
+          <p class="text-slate-400 text-sm md:text-base font-medium">Total Revenue</p>
+          <i class="bi bi-list text-2xl text-slate-400"></i>
+        </div>
+        <p class="text-3xl md:text-4xl font-bold text-slate-200 mt-3 animate-count-up">
+          Rs. {{ totalRevenue.toLocaleString() }}.00
+        </p>
+        <div class="mt-4 space-y-2 text-sm">
+          <p class="text-slate-300 flex items-center gap-1">
+            <i class="bi bi-clock text-emerald-500"></i> Today: Rs. {{ totalRevenueToday.toLocaleString() }}.00
+          </p>
+          <p class="text-slate-500 flex items-center gap-1">
+            <i class="bi bi-calendar-check text-emerald-200"></i> Yesterday: Rs. {{ totalRevenueYesterday.toLocaleString() }}.00
+          </p>
+          <p class="text-slate-300 flex items-center gap-1">
+            {{ orderPercentageByTodayVsYesterday }}% <i class="bi bi-arrow-up-right text-red-500"></i>
+          </p>
         </div>
       </div>
-
+    
+      <!-- Card 2: Orders Processed -->
       <div
-        class="p-4 md:p-6 rounded-3xl bg-slate-900 border border-gray-900 shadow-lg shadow-black transition-all duration-300 hover:bg-slate-950 animate-fade-down">
-        <p class="text-gray-400 text-xs md:text-sm font-medium">Orders Processed</p>
-        <p class="text-2xl md:text-3xl font-bold text-gray-300 mt-4">4,120</p>
-        <div class="space-y-1 mt-2 text-xs">
-          <p class="text-red-500">Pending: 28</p>
-          <p class="text-green-500">Completed: 4,092</p>
-          <p class="text-gray-600">Cancelled: 15</p>
+        class="relative p-5 md:p-7 rounded-2xl bg-slate-900 border border-slate-800 shadow-2xl shadow-black hover:bg-slate-950 animate-fade-down"
+      >
+        <div class="absolute top-0 left-0 w-10 h-10 bg-slate-600/20 rounded-full blur-lg"></div>
+        <div class="flex items-center justify-between gap-2 mb-7">
+          <p class="text-slate-400 text-sm md:text-base font-medium">Orders Processed</p>
+          <i class="bi bi-list text-2xl text-slate-400"></i>
+        </div>
+        <p class="text-3xl md:text-4xl font-bold text-slate-200 mt-3 animate-count-up">{{ allOrderCount }}</p>
+        <div class="mt-4 space-y-2 text-sm">
+          <p class="text-slate-300 flex items-center gap-1">
+            <i class="bi bi-hourglass-split text-emerald-500"></i> Pending: <span class="font-semibold">{{ allOrderCountByStatus[0] }}</span>
+          </p>
+          <p class="text-slate-300 flex items-center gap-1">
+            <i class="bi bi-truck text-blue-400"></i> Delivered: <span class="font-semibold">{{ allOrderCountByStatus[1] }}</span>
+          </p>
+          <p class="text-slate-500 flex items-center gap-1">
+            <i class="bi bi-x-circle text-red-500"></i> Cancelled: <span class="font-semibold">{{ allOrderCountByStatus[2] }}</span>
+          </p>
         </div>
       </div>
-
+    
+      <!-- Card 3: Items Count -->
       <div
-        class="p-4 md:p-6 rounded-3xl bg-slate-900 border border-gray-900 shadow-lg shadow-black transition-all duration-300 hover:bg-slate-950  animate-fade-up">
-        <p class="text-gray-400 text-xs md:text-sm font-medium">Active Locations</p>
-        <p class="text-2xl md:text-3xl font-bold text-gray-300 mt-4">50</p>
-        <div class="space-y-1 mt-2 text-xs">
-          <p class="text-red-500">Online: 50/50</p>
-          <p class="text-gray-600">Avg. Orders: 82</p>
-          <p class="text-gray-500">New: 2</p>
+        class="relative p-5 md:p-7 rounded-2xl bg-slate-900 border border-slate-800 shadow-2xl shadow-black hover:bg-slate-950 animate-fade-up"
+      >
+        <div class="absolute bottom-0 right-0 w-10 h-10 bg-slate-600/20 rounded-full blur-lg"></div>
+        <div class="flex items-center justify-between gap-2 mb-7">
+          <p class="text-slate-400 text-sm md:text-base font-medium">Items Count</p>
+          <i class="bi bi-basket text-xl text-slate-400"></i>
+        </div>
+        <p class="text-3xl md:text-4xl font-bold text-slate-200 mt-3 animate-count-up">{{ itemAllItemCount }}</p>
+        <div
+          class="mt-4 space-y-1 text-sm max-h-24 overflow-y-auto scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-900"
+        >
+          <p class="text-slate-300 flex items-center gap-1">
+           Burgers: <span class="font-semibold">{{ itemAllItemCountByCategory[0] }}</span>
+          </p>
+          <p class="text-slate-300 flex items-center gap-1">
+            Submarines: <span class="font-semibold">{{ itemAllItemCountByCategory[1] }}</span>
+          </p>
+          <p class="text-slate-300 flex items-center gap-1">
+             Fries: <span class="font-semibold">{{ itemAllItemCountByCategory[2] }}</span>
+          </p>
+          <p class="text-slate-300 flex items-center gap-1">
+           Pastas: <span class="font-semibold">{{ itemAllItemCountByCategory[3] }}</span>
+          </p>
+          <p class="text-slate-300 flex items-center gap-1">
+            Chicken: <span class="font-semibold">{{ itemAllItemCountByCategory[4] }}</span>
+          </p>
+          <p class="text-slate-300 flex items-center gap-1">
+          Beverages: <span class="font-semibold">{{ itemAllItemCountByCategory[5] }}</span>
+          </p>
         </div>
       </div>
-
+    
+      <!-- Card 4: Customers -->
       <div
-        class="p-4 md:p-6 rounded-3xl bg-slate-900 border border-gray-900 shadow-lg shadow-black transition-all duration-300 hover:bg-slate-950 animate-fade-down">
-        <p class="text-gray-400 text-xs md:text-sm font-medium">Customer Count</p>
-        <p class="text-2xl md:text-3xl font-bold text-gray-300 mt-4">3,890</p>
-        <div class="space-y-1 mt-2 text-xs">
-          <p class="text-red-500">New: 245</p>
-          <p class="text-gray-600">Returning: 3,645</p>
-          <p class="text-gray-500">VIP: 120</p>
+        class="relative p-5 md:p-7 rounded-2xl bg-slate-900 border border-slate-800 shadow-2xl shadow-black hover:bg-slate-950 animate-fade-down"
+      >
+        <div class="absolute bottom-0 left-0 w-10 h-10 bg-slate-600/20 rounded-full blur-lg"></div>
+        <div class="flex items-center justify-between gap-2 mb-7">
+          <p class="text-slate-400 text-sm md:text-base font-medium">Customers</p>
+          <i class="bi bi-people text-xl text-slate-400"></i>
         </div>
-      </div>
-
-      <div
-        class="p-4 md:p-6 rounded-3xl bg-slate-900 border border-gray-900 shadow-lg shadow-black transition-all duration-300 hover:bg-slate-950 animate-fade-up">
-        <p class="text-gray-400 text-xs md:text-sm font-medium">Staff Activity</p>
-        <p class="text-2xl md:text-3xl font-bold text-gray-300 mt-4">85</p>
-        <div class="space-y-1 mt-2 text-xs">
-          <p class="text-red-500">Active Now: 62</p>
-          <p class="text-gray-600">Orders/Hour: 45</p>
-          <p class="text-gray-500">Rating: 4.8</p>
-        </div>
-      </div>
-
-      <div
-        class="p-4 md:p-6 rounded-3xl bg-slate-900 border border-gray-900 shadow-lg shadow-black transition-all duration-300 hover:bg-slate-950  animate-fade-down">
-        <p class="text-gray-400 text-xs md:text-sm font-medium">Avg. Ticket Size</p>
-        <p class="text-2xl md:text-3xl font-bold text-gray-300 mt-4">Rs. 850.25</p>
-        <div class="space-y-1 mt-2 text-xs">
-          <p class="text-red-500">Today: Rs. 900.50</p>
-          <p class="text-gray-600">Week Avg: Rs. 830.10</p>
-          <p class="text-green-500">+2.5%</p>
+        <p class="text-3xl md:text-4xl font-bold text-slate-200 mt-3 animate-count-up">{{ allCustomerCount }}</p>
+        <div class="mt-4 space-y-2 text-sm">
+          <p class="text-slate-300 flex items-center gap-1">
+            <i class="bi bi-star-fill text-emerald-400"></i> Loyalty Points:
+            <span class="font-semibold">{{ allCustomerLoyaltyPoints }}</span>
+          </p>
+          <p class="text-slate-300 flex items-center gap-1">
+            <i class="bi bi-person-plus"></i> New: <span class="font-semibold">24</span>
+          </p>
+          <p class="text-slate-300 flex items-center gap-1">
+            <i class="bi bi-arrow-repeat"></i> Returning: <span class="font-semibold">37</span>
+          </p>
+          <p class="text-slate-300 flex items-center gap-1">
+            <i class="bi bi-gem"></i> VIP: <span class="font-semibold">12</span>
+          </p>
         </div>
       </div>
     </div>
+    
 
 
     <!-- Main Content Grid -->

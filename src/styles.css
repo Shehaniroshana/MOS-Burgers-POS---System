@@ -100,3 +100,28 @@
 .swal2-timer-progress-bar {
   background-color: #10b981; /* Tailwind green-500 */
 }
+
+/* Firefox: Ultra-thin scrollbar */
+* {
+  scrollbar-width: thin; /* Thinnest option for Firefox */
+  scrollbar-color: #464c5e #0f172a; /* Thumb: slate-600, Track: slate-900 */
+}
+
+/* WebKit: Ultra-thin scrollbar (Chrome, Edge, Safari) */
+::-webkit-scrollbar {
+  width: 6px; /* Super thin vertical scrollbar */
+  height: 6px; /* Super thin horizontal scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: #0f172a; /* Track: slate-900 */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ff2f2f; /* Thumb: slate-600 */
+  border-radius: 3px; /* Smaller radius for thinner bar */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #334155; /* Lighter slate for hover */
+}
