@@ -1,7 +1,8 @@
 .Active {
-   color: #e43f16;
-}
-
+   background: linear-gradient(to right, #4b5563, #6b7280);
+   color: #ffffff;
+   box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+ }
 nav a:hover:not(.active) {
   
 }

@@ -1,173 +1,207 @@
-<div class="min-h-screen text-gray-200 flex animate-fade-up">
-  <!-- Sidebar Navigation -->
-
-
+<div class="min-h-screen text-gray-200 flex animate-fade-up bg-gradient-to-br from-slate-950 to-red-950">
   <!-- Main Content -->
   <main class="flex-1 p-4 md:p-8">
     <header class="mb-6 md:mb-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
       <div class="items-start">
-        <h1 class="text-xl md:text-2xl font-extrabold text-gray-200 text-[1.5em] md:text-[2em]">MOS Burgers</h1>
-        <h2>{{date}}</h2>
+        <h1 class="text-xl md:text-2xl font-extrabold text-gray-100 text-[1.5em] md:text-[2em]">MOS Burgers</h1>
+        <h2 class="text-gray-400">{{date}}</h2>
       </div>
       <div class="relative w-full md:w-96">
         <input type="text" placeholder="Search Orders, Customers, Items..."
-          class="w-full px-4 py-2 rounded-2xl bg-gray-900 shadow-black shadow-xl text-gray-200 border border-gray-800 focus:outline-none ">
-        <button class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-red-400"><i
+          class="w-full px-4 py-2 rounded-2xl bg-gradient-to-br from-slate-900 to-gray-900 shadow-black shadow-xl text-gray-200 border border-slate-800 focus:outline-none">
+        <button class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-slate-400"><i
             class="bi bi-search"></i></button>
       </div>
     </header>
 
     <!-- Stats Grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 rounded-2xl">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 rounded-2xl text-sm">
       <!-- Card 1: Total Revenue -->
       <div
-        class="relative p-5 md:p-7 rounded-2xl bg-slate-900 border border-slate-800 shadow-2xl shadow-black hover:bg-slate-950 animate-fade-up"
-      >
-        <div class="absolute top-0 right-0 w-10 h-10 bg-slate-600/20 rounded-full blur-lg"></div>
-        <div class="flex items-center justify-between gap-2 mb-7">
-          <p class="text-slate-400 text-sm md:text-base font-medium">Total Revenue</p>
-          <i class="bi bi-list text-2xl text-slate-400"></i>
-        </div>
-        <p class="text-3xl md:text-4xl font-bold text-slate-200 mt-3 animate-count-up">
-          Rs. {{ totalRevenue.toLocaleString() }}.00
-        </p>
-        <div class="mt-4 space-y-2 text-sm">
-          <p class="text-slate-300 flex items-center gap-1">
-            <i class="bi bi-clock text-emerald-500"></i> Today: Rs. {{ totalRevenueToday.toLocaleString() }}.00
-          </p>
-          <p class="text-slate-500 flex items-center gap-1">
-            <i class="bi bi-calendar-check text-emerald-200"></i> Yesterday: Rs. {{ totalRevenueYesterday.toLocaleString() }}.00
-          </p>
-          <p class="text-slate-300 flex items-center gap-1">
-            {{ orderPercentageByTodayVsYesterday }}% <i class="bi bi-arrow-up-right text-red-500"></i>
-          </p>
-        </div>
-      </div>
+  class="relative rounded-2xl border border-slate-800 shadow-xl shadow-black/50 hover:scale-105 hover:shadow-2xl hover:shadow-slate-800/30 transition-all duration-500 animate-fade-up backdrop-blur-sm"
+  style="background: url('dashboard/revenue.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+  <div class="absolute top-0 right-0 w-8 h-8 bg-slate-800/20 rounded-full blur-md animate-pulse"></div>
+  <div class="bg-black/50 w-full h-full relative z-10 backdrop-filter backdrop-blur-sm rounded-2xl p-4">
+    <div class="flex items-center justify-between gap-2 mb-4">
+      <p class="text-gray-400 text-xs font-semibold tracking-wider uppercase animate-pulse">Total Revenue</p>
+      <i class="bi bi-wallet2 text-base text-gray-200 animate-spin-slow"></i>
+    </div>
+    <p class="text-lg md:text-xl font-extrabold text-gray-100 animate-count-up bg-clip-text text-transparent bg-gradient-to-r from-gray-100 to-gray-400">
+      Rs. {{ totalRevenue.toLocaleString() }}.00
+    </p>
+    <div class="mt-3 space-y-1 text-xs">
+      <p class="text-gray-400 flex items-center gap-1 hover:text-gray-200 transition-colors">
+        <i class="bi bi-clock text-gray-200 text-xs"></i> Today: Rs. {{ totalRevenueToday.toLocaleString() }}.00
+      </p>
+      <p class="text-gray-400 flex items-center gap-1 hover:text-gray-200 transition-colors">
+        <i class="bi bi-calendar-check text-gray-200 text-xs"></i> Yesterday: Rs. {{ totalRevenueYesterday.toLocaleString() }}.00
+      </p>
+      <p class="text-gray-400 flex items-center gap-1 hover:text-gray-200 transition-colors">
+        {{ orderPercentageByTodayVsYesterday }}% <i class="bi bi-arrow-up-right text-gray-200 text-xs animate-bounce"></i>
+      </p>
+    </div>
+  </div>
+</div>
     
       <!-- Card 2: Orders Processed -->
       <div
-        class="relative p-5 md:p-7 rounded-2xl bg-slate-900 border border-slate-800 shadow-2xl shadow-black hover:bg-slate-950 animate-fade-down"
-      >
-        <div class="absolute top-0 left-0 w-10 h-10 bg-slate-600/20 rounded-full blur-lg"></div>
-        <div class="flex items-center justify-between gap-2 mb-7">
-          <p class="text-slate-400 text-sm md:text-base font-medium">Orders Processed</p>
-          <i class="bi bi-list text-2xl text-slate-400"></i>
+        class="relative rounded-2xl bg-gradient-to-br from-slate-900/80 to-gray-900/80  border border-slate-800 shadow-xl shadow-black/50 hover:scale-105 hover:shadow-2xl hover:shadow-slate-800/30 transition-all duration-500 animate-fade-down backdrop-blur-sm bg-blend-overlay"
+        style="background: url('dashboard/orders.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+        <div class="absolute top-0 left-0 w-8 h-8 bg-slate-800/20 rounded-full blur-md animate-pulse"></div>
+       <div class="bg-black/50 w-full h-full relative z-10 backdrop-filter backdrop-blur-sm rounded-2xl p-4">
+        
+        <div class="flex items-center justify-between gap-2 mb-4">
+          <p class="text-gray-400 text-xs font-semibold tracking-wider uppercase animate-pulse">Orders Processed</p>
+          <i class="bi bi-cart-check text-base text-gray-200 animate-spin-slow"></i>
         </div>
-        <p class="text-3xl md:text-4xl font-bold text-slate-200 mt-3 animate-count-up">{{ allOrderCount }}</p>
-        <div class="mt-4 space-y-2 text-sm">
-          <p class="text-slate-300 flex items-center gap-1">
-            <i class="bi bi-hourglass-split text-emerald-500"></i> Pending: <span class="font-semibold">{{ allOrderCountByStatus[0] }}</span>
+        <p class="text-lg md:text-xl font-extrabold text-gray-100 animate-count-up bg-clip-text text-transparent bg-gradient-to-r from-gray-100 to-gray-400">
+          {{ allOrderCount }}
+        </p>
+        <div class="mt-3 space-y-1 text-xs">
+          <p class="text-gray-400 flex items-center gap-1 hover:text-gray-200 transition-colors">
+            <i class="bi bi-hourglass-split text-gray-200 text-xs"></i> Pending: <span class="font-semibold">{{ allOrderCountByStatus[0] }}</span>
           </p>
-          <p class="text-slate-300 flex items-center gap-1">
-            <i class="bi bi-truck text-blue-400"></i> Delivered: <span class="font-semibold">{{ allOrderCountByStatus[1] }}</span>
+          <p class="text-gray-400 flex items-center gap-1 hover:text-gray-200 transition-colors">
+            <i class="bi bi-truck text-gray-200 text-xs"></i> Delivered: <span class="font-semibold">{{ allOrderCountByStatus[1] }}</span>
           </p>
-          <p class="text-slate-500 flex items-center gap-1">
-            <i class="bi bi-x-circle text-red-500"></i> Cancelled: <span class="font-semibold">{{ allOrderCountByStatus[2] }}</span>
+          <p class="text-gray-400 flex items-center gap-1 hover:text-gray-200 transition-colors">
+            <i class="bi bi-x-circle text-gray-200 text-xs"></i> Cancelled: <span class="font-semibold">{{ allOrderCountByStatus[2] }}</span>
           </p>
         </div>
+
+
+       </div>
       </div>
     
       <!-- Card 3: Items Count -->
       <div
-        class="relative p-5 md:p-7 rounded-2xl bg-slate-900 border border-slate-800 shadow-2xl shadow-black hover:bg-slate-950 animate-fade-up"
-      >
-        <div class="absolute bottom-0 right-0 w-10 h-10 bg-slate-600/20 rounded-full blur-lg"></div>
-        <div class="flex items-center justify-between gap-2 mb-7">
-          <p class="text-slate-400 text-sm md:text-base font-medium">Items Count</p>
-          <i class="bi bi-basket text-xl text-slate-400"></i>
+        class="relative  rounded-2xl bg-gradient-to-br from-slate-900/80 to-gray-900/80  border border-slate-800 shadow-xl shadow-black/50 hover:scale-105 hover:shadow-2xl hover:shadow-slate-800/30 transition-all duration-500 animate-fade-up backdrop-blur-sm bg-blend-overlay"
+        style="background: url('dashboard/item.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+        
+        <div class="absolute bottom-0 right-0 w-8 h-8 bg-slate-800/20 rounded-full blur-md animate-pulse"></div>
+
+
+        <div class="bg-black/50 w-full h-full relative z-10 backdrop-filter backdrop-blur-sm rounded-2xl p-4">
+
+             <div class="flex items-center justify-between gap-2 mb-4">
+          <p class="text-gray-400 text-xs font-semibold tracking-wider uppercase animate-pulse">Items Count</p>
+          <i class="bi bi-basket text-base text-gray-200 animate-spin-slow"></i>
         </div>
-        <p class="text-3xl md:text-4xl font-bold text-slate-200 mt-3 animate-count-up">{{ itemAllItemCount }}</p>
+        <p class="text-lg md:text-xl font-extrabold text-gray-100 animate-count-up bg-clip-text text-transparent bg-gradient-to-r from-gray-100 to-gray-400">
+          {{ itemAllItemCount }}
+        </p>
         <div
-          class="mt-4 space-y-1 text-sm max-h-24 overflow-y-auto scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-900"
-        >
-          <p class="text-slate-300 flex items-center gap-1">
-           Burgers: <span class="font-semibold">{{ itemAllItemCountByCategory[0] }}</span>
+          class="mt-3 space-y-1 text-xs max-h-20 overflow-y-auto scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-gray-900">
+          <p class="text-gray-400 flex items-center gap-1 hover:text-gray-200 transition-colors">
+            Burgers: <span class="font-semibold">{{ itemAllItemCountByCategory[0] }}</span>
           </p>
-          <p class="text-slate-300 flex items-center gap-1">
+          <p class="text-gray-400 flex items-center gap-1 hover:text-gray-200 transition-colors">
             Submarines: <span class="font-semibold">{{ itemAllItemCountByCategory[1] }}</span>
           </p>
-          <p class="text-slate-300 flex items-center gap-1">
-             Fries: <span class="font-semibold">{{ itemAllItemCountByCategory[2] }}</span>
+          <p class="text-gray-400 flex items-center gap-1 hover:text-gray-200 transition-colors">
+            Fries: <span class="font-semibold">{{ itemAllItemCountByCategory[2] }}</span>
           </p>
-          <p class="text-slate-300 flex items-center gap-1">
-           Pastas: <span class="font-semibold">{{ itemAllItemCountByCategory[3] }}</span>
+          <p class="text-gray-400 flex items-center gap-1 hover:text-gray-200 transition-colors">
+            Pastas: <span class="font-semibold">{{ itemAllItemCountByCategory[3] }}</span>
           </p>
-          <p class="text-slate-300 flex items-center gap-1">
+          <p class="text-gray-400 flex items-center gap-1 hover:text-gray-200 transition-colors">
             Chicken: <span class="font-semibold">{{ itemAllItemCountByCategory[4] }}</span>
           </p>
-          <p class="text-slate-300 flex items-center gap-1">
-          Beverages: <span class="font-semibold">{{ itemAllItemCountByCategory[5] }}</span>
+          <p class="text-gray-400 flex items-center gap-1 hover:text-gray-200 transition-colors">
+            Beverages: <span class="font-semibold">{{ itemAllItemCountByCategory[5] }}</span>
           </p>
         </div>
+        </div>
+
+     
       </div>
     
       <!-- Card 4: Customers -->
       <div
-        class="relative p-5 md:p-7 rounded-2xl bg-slate-900 border border-slate-800 shadow-2xl shadow-black hover:bg-slate-950 animate-fade-down"
-      >
-        <div class="absolute bottom-0 left-0 w-10 h-10 bg-slate-600/20 rounded-full blur-lg"></div>
-        <div class="flex items-center justify-between gap-2 mb-7">
-          <p class="text-slate-400 text-sm md:text-base font-medium">Customers</p>
-          <i class="bi bi-people text-xl text-slate-400"></i>
+        class="relative  rounded-2xl bg-gradient-to-br from-slate-900/80 to-gray-900/80  border border-slate-800 shadow-xl shadow-black/50 hover:scale-105 hover:shadow-2xl hover:shadow-slate-800/30 transition-all duration-500 animate-fade-down backdrop-blur-sm bg-blend-overlay"
+        style="background: url('dashboard/customer.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+        <div class="absolute bottom-0 left-0 w-8 h-8 bg-slate-800/20 rounded-full blur-md animate-pulse"></div>
+
+        <div class="bg-black/50 w-full h-full relative z-10 backdrop-filter backdrop-blur-sm rounded-2xl p-4">
+
+          <div class="flex items-center justify-between gap-2 mb-4">
+          <p class="text-gray-400 text-xs font-semibold tracking-wider uppercase animate-pulse">Customers</p>
+          <i class="bi bi-people text-base text-gray-200 animate-spin-slow"></i>
         </div>
-        <p class="text-3xl md:text-4xl font-bold text-slate-200 mt-3 animate-count-up">{{ allCustomerCount }}</p>
-        <div class="mt-4 space-y-2 text-sm">
-          <p class="text-slate-300 flex items-center gap-1">
-            <i class="bi bi-star-fill text-emerald-400"></i> Loyalty Points:
-            <span class="font-semibold">{{ allCustomerLoyaltyPoints }}</span>
+        <p class="text-lg md:text-xl font-extrabold text-gray-100 animate-count-up bg-clip-text text-transparent bg-gradient-to-r from-gray-100 to-gray-400">
+          {{ allCustomerCount }}
+        </p>
+        <div class="mt-3 space-y-1 text-xs">
+          <p class="text-gray-400 flex items-center gap-1 hover:text-gray-200 transition-colors">
+            <i class="bi bi-star-fill text-gray-200 text-xs"></i> Loyalty Points: <span class="font-semibold">{{ allCustomerLoyaltyPoints }}</span>
           </p>
-          <p class="text-slate-300 flex items-center gap-1">
-            <i class="bi bi-person-plus"></i> New: <span class="font-semibold">24</span>
+          <p class="text-gray-400 flex items-center gap-1 hover:text-gray-200 transition-colors">
+            <i class="bi bi-person-plus text-gray-200 text-xs"></i> New: <span class="font-semibold">24</span>
           </p>
-          <p class="text-slate-300 flex items-center gap-1">
-            <i class="bi bi-arrow-repeat"></i> Returning: <span class="font-semibold">37</span>
+          <p class="text-gray-400 flex items-center gap-1 hover:text-gray-200 transition-colors">
+            <i class="bi bi-arrow-repeat text-gray-200 text-xs"></i> Returning: <span class="font-semibold">37</span>
           </p>
-          <p class="text-slate-300 flex items-center gap-1">
-            <i class="bi bi-gem"></i> VIP: <span class="font-semibold">12</span>
+          <p class="text-gray-400 flex items-center gap-1 hover:text-gray-200 transition-colors">
+            <i class="bi bi-gem text-gray-200 text-xs"></i> VIP: <span class="font-semibold">12</span>
           </p>
         </div>
+        </div>
+
+        
       </div>
     </div>
-    
-
 
     <!-- Main Content Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mt-6">
       <!-- Recent Orders Table (2 cols) -->
       <div
-      class="lg:col-span-2 bg-slate-900 rounded-3xl p-4 md:p-6 border border-gray-800 shadow-black shadow-xl animate-fade-in">
+        class="lg:col-span-2 bg-gradient-to-br from-slate-900 to-gray-900 rounded-3xl border border-slate-800 shadow-black shadow-xl animate-fade-in"
+        style="background: url('dashboard/orderchart.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+        <div class="bg-black/50 w-full h-full relative z-10 backdrop-filter backdrop-blur-sm rounded-2xl p-4">
           <app-recent-orders></app-recent-orders>
-    </div>
+        </div>
+      </div>
 
       <!-- Sales Chart (2 cols) -->
       <div
-        class="lg:col-span-2 h-80 bg-slate-900 p-4 md:p-5 rounded-3xl border border-gray-800 shadow-black shadow-xl animate-fade-in">
-        <app-revenue-chart></app-revenue-chart>
+        class="lg:col-span-2 h-80 bg-gradient-to-br from-slate-900 to-gray-900 rounded-3xl border border-slate-800 shadow-black shadow-xl animate-fade-in"
+        style="background: url('dashboard/chart.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+        <div class="bg-black/50 w-full h-full relative z-10 backdrop-filter backdrop-blur-sm rounded-2xl p-4">
+                  <app-revenue-chart></app-revenue-chart>
+        </div>
       </div>
 
       <!-- Best Customers (1 col) -->
-      <div class="p-4 md:p-6 rounded-3xl bg-slate-900 border border-gray-800 shadow-black shadow-xl animate-fade-in">
-       <app-best-customers></app-best-customers>
+      <div class=" rounded-3xl bg-gradient-to-br from-slate-900 to-gray-900 border border-slate-800 shadow-black shadow-xl animate-fade-in"
+      style="background: url('dashboard/bestCustomers.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+      <div class="bg-black/30 w-full h-full relative z-10 backdrop-filter backdrop-blur-sm rounded-2xl p-4">
+              <app-best-customers></app-best-customers>
+      </div>
       </div>
 
-      <!-- Iteme Status (1 col) -->
-      <div class="p-4 md:p-6 rounded-3xl bg-slate-900 border border-gray-800 shadow-black shadow-xl animate-fade-in">
-        <app-inventory-status></app-inventory-status>
+      <!-- Item Status (1 col) -->
+      <div class=" rounded-3xl bg-gradient-to-br from-slate-900 to-gray-900 border border-slate-800 shadow-black shadow-xl animate-fade-in"
+        style="background: url('dashboard/inventory.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+        <div class="bg-black/30 w-full h-full relative z-10 backdrop-filter backdrop-blur-sm rounded-2xl p-4">
+                  <app-inventory-status></app-inventory-status>
+        </div>
       </div>
 
       <!-- Top Performers (1 col) -->
-      <div class="p-4 md:p-6 rounded-3xl bg-slate-900 border border-gray-800 shadow-black shadow-xl animate-fade-in">
+      <div class="rounded-3xl bg-gradient-to-br from-slate-900 to-gray-900 border border-slate-800 shadow-black shadow-xl animate-fade-in"
+        style="background: url('dashboard/addCustomer.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+        <div class="bg-black/30 w-full h-full relative z-10 backdrop-filter backdrop-blur-sm rounded-2xl p-4">
         <app-add-customer></app-add-customer>
+        </div>
       </div>
 
       <!-- Quick Actions (1 col) -->
-      <div class="p-4 md:p-6 rounded-xl bg-slate-900 border border-gray-800 shadow-black shadow-xl items-center animate-fade-in">
-        <app-best-items></app-best-items>
+      <div class=" rounded-xl bg-gradient-to-br from-slate-900 to-gray-900 border border-slate-800 shadow-black shadow-xl items-center animate-fade-in"
+        style="background: url('dashboard/bestItems.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+        <div class="bg-black/30 w-full h-full relative z-10 backdrop-filter backdrop-blur-sm rounded-2xl p-4">
+                  <app-best-items></app-best-items>
+        </div>
       </div>
-
-    
-
-    
     </div>
   </main>
 </div>

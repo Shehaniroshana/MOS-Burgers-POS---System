@@ -1,51 +1,50 @@
-<div class="flex h-screen bg-slate-950">
+<div class="flex h-screen bg-gray-900">
   <!-- Sidebar -->
-  <div class="w-20 bg-slate-950 text-white flex flex-col items-center py-4">
-    <!-- Logo/Icon -->
-    <div class="w-16 h-16 bg-gray-800 items-center flex justify-center rounded-full mb-10">
-      <img src="logo/logo.png" alt="" class="w-12 p-2 ">
+  <div class="w-16 bg-slate-950 text-gray-300 flex flex-col items-center py-4">
+    <!-- Logo -->
+    <div class="w-12 h-12 bg-gray-700 rounded-xl flex items-center justify-center mb-8 transition-transform hover:rotate-12">
+      <img src="logo/logo.png" alt="Logo" class="w-8 p-1">
     </div>
-    <nav class="flex-1 flex flex-col items-center gap-6 text-[20px]">
-
-      <a class="bg-gradient-to-t from-gray-800 to-gray-900 rounded-full w-12 h-12 flex items-center justify-center"
-        routerLink="/navbar/" routerLinkActive="Active" [routerLinkActiveOptions]="{ exact: true }">
-        <i class="bi bi-house-door-fill"></i>
+    <nav class="flex-1 flex flex-col items-center gap-6 text-lg">
+      <a class="relative bg-gray-700 rounded-xl w-10 h-10 flex items-center justify-center hover:bg-gray-600 hover:shadow-md transition-all"
+         routerLink="/navbar/" routerLinkActive="Active" [routerLinkActiveOptions]="{ exact: true }">
+        <i class="bi bi-house-door"></i>
+        <span class="absolute left-12 bg-gray-600 text-xs rounded px-2 py-1 opacity-0 hover:opacity-100 transition-opacity">Home</span>
       </a>
-
-      <a class="bg-gradient-to-t from-gray-800 to-gray-900 rounded-full w-12 h-12 flex items-center justify-center"
-        routerLink="/navbar/placeorder" routerLinkActive="Active">
-        <i class="bi bi-bag-check-fill"></i>
+      <a class="relative bg-gray-700 rounded-xl w-10 h-10 flex items-center justify-center hover:bg-gray-600 hover:shadow-md transition-all"
+         routerLink="/navbar/placeorder" routerLinkActive="Active">
+        <i class="bi bi-cart"></i>
+        <span class="absolute left-12 bg-gray-600 text-xs rounded px-2 py-1 opacity-0 hover:opacity-100 transition-opacity">Order</span>
       </a>
-      <a class="bg-gradient-to-t from-gray-800 to-gray-900 rounded-full w-12 h-12 flex items-center justify-center"
-        routerLink="/navbar/orders" routerLinkActive="Active">
-        <i class="bi bi-bag-x"></i>
+      <a class="relative bg-gray-700 rounded-xl w-10 h-10 flex items-center justify-center hover:bg-gray-600 hover:shadow-md transition-all"
+         routerLink="/navbar/orders" routerLinkActive="Active">
+        <i class="bi bi-list-task"></i>
+        <span class="absolute left-12 bg-gray-600 text-xs rounded px-2 py-1 opacity-0 hover:opacity-100 transition-opacity">Orders</span>
       </a>
-      <a class="bg-gradient-to-t from-gray-800 to-gray-900 rounded-full w-12 h-12 flex items-center justify-center"
-        routerLink="/navbar/customer" routerLinkActive="Active">
-        <i class="bi bi-person-lines-fill"></i>
+      <a class="relative bg-gray-700 rounded-xl w-10 h-10 flex items-center justify-center hover:bg-gray-600 hover:shadow-md transition-all"
+         routerLink="/navbar/customer" routerLinkActive="Active">
+        <i class="bi bi-person"></i>
+        <span class="absolute left-12 bg-gray-600 text-xs rounded px-2 py-1 opacity-0 hover:opacity-100 transition-opacity">Customers</span>
       </a>
-      <a class="bg-gradient-to-t from-gray-800 to-gray-900 rounded-full w-12 h-12 flex items-center justify-center"
-        routerLink="/navbar/food-item-manage" routerLinkActive="Active">
-        <i class="fas fa-hamburger"></i>
-      </a> 
-      
-      <a class="bg-gradient-to-t from-gray-800 to-gray-900 rounded-full w-12 h-12 flex items-center justify-center"
-      routerLink="/navbar/food-item-manage" routerLinkActive="Active">
-      <i class="bi bi-bar-chart-fill"></i>
-        </a>
-
-
+      <a class="relative bg-gray-700 rounded-xl w-10 h-10 flex items-center justify-center hover:bg-gray-600 hover:shadow-md transition-all"
+         routerLink="/navbar/food-item-manage" routerLinkActive="Active">
+         <i class="fas fa-hamburger"></i>
+                 <span class="absolute left-12 bg-gray-600 text-xs rounded px-2 py-1 opacity-0 hover:opacity-100 transition-opacity">Menu</span>
+      </a>
     </nav>
     <!-- Footer -->
-    <div class="mt-auto text-[20px]">
-      <a class="bg-gradient-to-t from-gray-800 to-gray-900 rounded-full w-12 h-12 flex items-center justify-center"
-        routerLink="/navbar/sign-in">
-        <i class="fa fa-sign-out" aria-hidden="true"></i>
+    <div class="mt-auto text-lg">
+      <a class="relative bg-gray-700 rounded-xl w-10 h-10 flex items-center justify-center hover:bg-gray-600 hover:shadow-md transition-all"
+         routerLink="/navbar/sign-in">
+        <i class="bi bi-box-arrow-right"></i>
+        <span class="absolute left-12 bg-gray-600 text-xs rounded px-2 py-1 opacity-0 hover:opacity-100 transition-opacity">Logout</span>
       </a>
     </div>
   </div>
-  <div class="flex-1 p-0 m-0 overflow-y-auto bg-slate-950">
+  <div class="flex-1 p-0 m-0 overflow-y-auto bg-slate-950"
+  style="background: url('dashboard/orderchart.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+  <div class="bg-black/50 w-full h-full relative z-10 backdrop-filter backdrop-blur-sm rounded-2xl">
     <router-outlet></router-outlet>
   </div>
-
+  </div>
 </div>

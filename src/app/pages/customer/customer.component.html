@@ -25,38 +25,53 @@
 
 
         <!-- Customers Table -->
-        <div class="bg-slate-900 backdrop-blur-lg rounded-3xl shadow-lg overflow-x-auto shadow-black shadow-2xl">
-          <table class="min-w-full">
-            <thead>
-              <tr class="text-gray-400 text-sm uppercase tracking-wide">
-                <th class="py-4 px-6 text-left">Customer ID</th>
-                <th class="py-4 px-6 text-left">Name</th>
-                <th class="py-4 px-6 text-left">Contact</th>
-                <th class="py-4 px-6 text-left">Loyalty Points</th>
-                <th class="py-4 px-6 text-left">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let customer of customers" class="border-t border-gray-700 transition duration-200">
-                <td class="py-4 px-6 text-red-400">#{{ customer.id }}</td>
-                <td class="py-4 px-6 text-gray-200">{{ customer.name }}</td>
-                <td class="py-4 px-6 text-gray-200">{{ customer.contact }}</td>
-                <td class="py-4 px-6 text-gray-200">{{ customer.loyaltyPoints.toFixed(2) }}</td>
-                <td class="py-4 px-6 text-gray-200">
-                  <button class="text-green-200 hover:text-green-400 m-2" (click)="updateCustomer(customer)"><i
-                      class="bi bi-pencil-square"></i></button>
-                  <button class="text-blue-400 hover:text-blue-600 m-2"
-                    (click)="updateLoyaltyPoints(customer.id, customer.loyaltyPoints)"><i
-                      class="bi bi-arrow-up-right"></i></button>
-                  <button class="text-red-400 hover:text-red-600 m-2" (click)="deleteCustomer(customer.id)"><i
-                      class="bi bi-trash"></i></button>
-                </td>
-              </tr>
-              <tr *ngIf="customers.length === 0" class="border-t border-gray-700">
-                <td colspan="5" class="py-4 px-6 text-gray-200 text-center">No customers found.</td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="bg-slate-900 backdrop-blur-lg rounded-3xl overflow-x-auto shadow-black shadow-2xl">
+          <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+          <div class="container mx-auto p-4 bg-gray-900 min-h-screen">
+            <div class="space-y-4">
+              <div *ngFor="let customer of customers" class="bg-slate-950 rounded-lg shadow-lg p-5 border border-gray-700 hover:border-gray-600 transition-all duration-300 flex flex-col md:flex-row md:items-center justify-between group">
+                <!-- User Icon and Customer Info -->
+                <div class="flex flex-col space-y-3 md:space-y-0 md:flex-row md:space-x-6 items-start md:items-center">
+                  <div class="flex items-center space-x-3">
+                    <i class="bi bi-person-circle text-2xl text-gray-400 group-hover:text-gray-200 transition-colors"></i>
+                    <div>
+                      <span class="text-gray-500 text-xs uppercase tracking-wider">Customer ID</span>
+                      <p class="text-red-400 font-semibold">#{{ customer.id }}</p>
+                    </div>
+                  </div>
+                  <div>
+                    <span class="text-gray-500 text-xs uppercase tracking-wider">Name</span>
+                    <p class="text-gray-200 font-medium">{{ customer.name }}</p>
+                  </div>
+                  <div>
+                    <span class="text-gray-500 text-xs uppercase tracking-wider">Contact</span>
+                    <p class="text-gray-200">{{ customer.contact }}</p>
+                  </div>
+                  <div>
+                    <span class="text-gray-500 text-xs uppercase tracking-wider">Loyalty Points</span>
+                    <p class="text-gray-200 font-medium">{{ customer.loyaltyPoints.toFixed(2) }}</p>
+                  </div>
+                </div>
+          
+                <!-- Action Buttons -->
+                <div class="flex space-x-2 mt-4 md:mt-0">
+                  <button class="text-green-300 hover:text-green-500 p-2 rounded-md bg-gray-800/50 hover:bg-gray-700/50 transition-all duration-200" (click)="updateCustomer(customer)" title="Edit Customer">
+                    <i class="bi bi-pencil-square"></i>
+                  </button>
+                  <button class="text-blue-400 hover:text-blue-600 p-2 rounded-md bg-gray-800/50 hover:bg-gray-700/50 transition-all duration-200" (click)="updateLoyaltyPoints(customer.id, customer.loyaltyPoints)" title="Update Points">
+                    <i class="bi bi-arrow-up-right"></i>
+                  </button>
+                  <button class="text-red-400 hover:text-red-600 p-2 rounded-md bg-gray-800/50 hover:bg-gray-700/50 transition-all duration-200" (click)="deleteCustomer(customer.id)" title="Delete Customer">
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </div>
+              </div>
+              <div *ngIf="customers.length === 0" class="bg-slate-950 rounded-lg shadow-lg p-5 text-gray-200 text-center border border-gray-700">
+                No customers found.
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

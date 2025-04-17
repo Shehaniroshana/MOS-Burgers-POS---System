@@ -36,7 +36,7 @@ export async function getTotalRevenueInCurrentMonth(): Promise<number> {
     }
 }
 
-export async function getRevenueByLast6Month(): Promise<{ [month: string]: number }> {
+export async function getRevenueByLast6Month(): Promise<number[]> {
     try {
         const response = await fetch(`${API_BASE_URL}/revenue/last-6-months`);
         return await response.json();

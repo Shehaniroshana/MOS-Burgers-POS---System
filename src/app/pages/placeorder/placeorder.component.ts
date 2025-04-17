@@ -100,28 +100,42 @@ export class PlaceorderComponent {
     qty: number,
     name: string,
     imagePath: string
-  ) {
+) {
+    // Check if item with same id exists in cartItems
+    const existingCartItemIndex = this.cartItems.findIndex(item => item.id === id);
     
-    const cart_id: number = new Date().getTime();
-    console.log(cart_id);
-    const cartItem: cart_item = {
-      cart_id,
-      id,
-      price,
-      discount,
-      qty,
-      name,
-      imagePath,
-    };
-    this.cartItems.push(cartItem);
+    if (existingCartItemIndex !== -1) {
+        // Update only the quantity of the existing item
+        this.cartItems[existingCartItemIndex].qty += qty;
+        
+        // Update quantity in ItemDetails
+        const existingItemDetailIndex = this.ItemDetails.findIndex(item => item.itemId === id);
+        if (existingItemDetailIndex !== -1) {
+            this.ItemDetails[existingItemDetailIndex].quantity += qty;
+        }
+    } else {
+        // Add new item
+        const cart_id: number = new Date().getTime();
+        console.log(cart_id);
+        const cartItem: cart_item = {
+            cart_id,
+            id,
+            price,
+            discount,
+            qty,
+            name,
+            imagePath,
+        };
+        this.cartItems.push(cartItem);
 
-    this.ItemDetails.push({
-      itemId: id,
-      quantity: qty,
-      itemName: name,
-      itemImage: imagePath
-    });
-  }
+        this.ItemDetails.push({
+            itemId: id,
+            quantity: qty,
+            itemName: name,
+            itemImage: imagePath
+        });
+    }
+}
 
   remove_search_Item(item_id: number) {
     this.items = this.items.filter((item) => item.id !== item_id);
