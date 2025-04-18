@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import Swal from 'sweetalert2';
+import { createAccount } from '../../Service/RegisterService';
 
 @Component({
   selector: 'app-register-form',
@@ -21,49 +22,7 @@ export class RegisterFormComponent {
 
   register(fullName: string, email: string, role: string, password: string, confirmPassword: string) {
 
-    if (fullName != '' && email != '' && role != '' && password != '' && confirmPassword != '') {
-
-      if (password === confirmPassword) {
-        console.log(fullName, email, role, password, confirmPassword);
-
-
-        const myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
-
-        const raw = JSON.stringify({
-          "userName": fullName,
-          "password": password,
-          "role": role,
-          "email": email
-        });
-
-        const requestOptions = {
-          method: "POST",
-          headers: myHeaders,
-          body: raw,
-          redirect: "follow" as RequestRedirect
-        };
-
-        fetch("http://localhost:8080/mos/user/saveUser", requestOptions)
-          .then((response) => response.text())
-          .then((result) =>{
-            console.log(result);
-            if (result==='true') {
-              Swal.fire('Success!', 'Registration successful', 'success');
-              this.router.navigate(['/']);
-            } else {
-              Swal.fire('Error!', 'Try another email this email is already registered', 'error');
-            }
-          })
-          .catch((error) => console.error(error));
-
-      } else {
-        Swal.fire('Error!', 'Passwords do not match', 'error');
-      }
-
-    } else {
-      Swal.fire('Error!', 'Please enter all the fields', 'error');
-    }
+   createAccount(fullName, email, role, password, confirmPassword, this.router);
 
   }
 

@@ -153,6 +153,25 @@
 
     <!-- Main Content Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mt-6">
+
+           <!-- Best Customers (1 col) -->
+           <div class=" rounded-3xl bg-gradient-to-br from-slate-900 to-gray-900 border border-slate-800 shadow-black shadow-xl animate-fade-in"
+           style="background: url('dashboard/bestCustomers.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+           <div class="bg-black/30 w-full h-full relative z-10 backdrop-filter backdrop-blur-sm rounded-2xl p-4">
+                   <app-best-customers></app-best-customers>
+           </div>
+           </div>
+     
+           <!-- Item Status (1 col) -->
+           <div class=" rounded-3xl bg-gradient-to-br from-slate-900 to-gray-900 border border-slate-800 shadow-black shadow-xl animate-fade-in"
+             style="background: url('dashboard/inventory.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+             <div class="bg-black/30 w-full h-full relative z-10 backdrop-filter backdrop-blur-sm rounded-2xl p-4">
+                       <app-inventory-status></app-inventory-status>
+             </div>
+           </div>
+     
+           <!-- Top Performers (1 col) -->
+          
       <!-- Recent Orders Table (2 cols) -->
       <div
         class="lg:col-span-2 bg-gradient-to-br from-slate-900 to-gray-900 rounded-3xl border border-slate-800 shadow-black shadow-xl animate-fade-in"
@@ -161,6 +180,20 @@
           <app-recent-orders></app-recent-orders>
         </div>
       </div>
+      <div class="rounded-3xl bg-gradient-to-br from-slate-900 to-gray-900 border border-slate-800 shadow-black shadow-xl animate-fade-in"
+      style="background: url('dashboard/addCustomer.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+      <div class="bg-black/30 w-full h-full relative z-10 backdrop-filter backdrop-blur-sm rounded-2xl p-4">
+      <app-add-customer></app-add-customer>
+      </div>
+    </div>
+
+    <!-- Quick Actions (1 col) -->
+    <div class=" rounded-xl bg-gradient-to-br from-slate-900 to-gray-900 border border-slate-800 shadow-black shadow-xl items-center animate-fade-in"
+      style="background: url('dashboard/bestItems.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+      <div class="bg-black/30 w-full h-full relative z-10 backdrop-filter backdrop-blur-sm rounded-2xl p-4">
+                <app-best-items></app-best-items>
+      </div>
+    </div>
 
       <!-- Sales Chart (2 cols) -->
       <div
@@ -171,37 +204,7 @@
         </div>
       </div>
 
-      <!-- Best Customers (1 col) -->
-      <div class=" rounded-3xl bg-gradient-to-br from-slate-900 to-gray-900 border border-slate-800 shadow-black shadow-xl animate-fade-in"
-      style="background: url('dashboard/bestCustomers.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-      <div class="bg-black/30 w-full h-full relative z-10 backdrop-filter backdrop-blur-sm rounded-2xl p-4">
-              <app-best-customers></app-best-customers>
-      </div>
-      </div>
-
-      <!-- Item Status (1 col) -->
-      <div class=" rounded-3xl bg-gradient-to-br from-slate-900 to-gray-900 border border-slate-800 shadow-black shadow-xl animate-fade-in"
-        style="background: url('dashboard/inventory.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-        <div class="bg-black/30 w-full h-full relative z-10 backdrop-filter backdrop-blur-sm rounded-2xl p-4">
-                  <app-inventory-status></app-inventory-status>
-        </div>
-      </div>
-
-      <!-- Top Performers (1 col) -->
-      <div class="rounded-3xl bg-gradient-to-br from-slate-900 to-gray-900 border border-slate-800 shadow-black shadow-xl animate-fade-in"
-        style="background: url('dashboard/addCustomer.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-        <div class="bg-black/30 w-full h-full relative z-10 backdrop-filter backdrop-blur-sm rounded-2xl p-4">
-        <app-add-customer></app-add-customer>
-        </div>
-      </div>
-
-      <!-- Quick Actions (1 col) -->
-      <div class=" rounded-xl bg-gradient-to-br from-slate-900 to-gray-900 border border-slate-800 shadow-black shadow-xl items-center animate-fade-in"
-        style="background: url('dashboard/bestItems.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-        <div class="bg-black/30 w-full h-full relative z-10 backdrop-filter backdrop-blur-sm rounded-2xl p-4">
-                  <app-best-items></app-best-items>
-        </div>
-      </div>
+ 
     </div>
   </main>
 </div>

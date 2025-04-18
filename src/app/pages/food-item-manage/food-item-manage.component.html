@@ -32,15 +32,14 @@
       <div class="container mx-auto">
 
         <!-- Items Table -->
-        <div class="bg-slate-900 overflow-x-auto shadow-black shadow-2xl rounded-3xl">
-          <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+        <div class="overflow-x-auto shadow-black shadow-2xl rounded-3xl">
 
-<div class="container mx-auto p-4 bg-gray-900 min-h-screen">
+<div class="container mx-auto p-4 bg-black/30 min-h-screen">
   <div class="space-y-4">
-    <div *ngFor="let item of items" class="bg-slate-950 rounded-lg shadow-md p-4 border border-gray-700 flex flex-col md:flex-row md:items-center justify-between">
+    <div *ngFor="let item of items" class="bg-slate-950/30 rounded-lg shadow-md p-4 border border-gray-700 flex flex-col md:flex-row md:items-center justify-between">
       <!-- Item Image, Icon, and Info -->
       <div class="flex flex-col space-y-3 md:space-y-0 md:flex-row md:space-x-4 items-start md:items-center">
-        <img [src]="item.image || 'https://via.placeholder.com/64'" alt="{{ item.name }}" class="w-16 h-16 object-cover rounded-md">
+        <img src="{{item.imagePath}}" alt="{{ item.name }}" class="w-16 h-16 object-cover rounded-md">
         <div class="flex items-center space-x-2">
           <i class="bi bi-box text-xl text-gray-400"></i>
           <div>
@@ -93,8 +92,10 @@
     </div>
   </div>
 
-  <div class="bg-gray-900 overflow-y-auto w-full md:w-1/3 h-full p-4">
+  <div class="bg-gray-900 overflow-y-auto w-full md:w-1/3 "
+  style="background: url('bg/itemPageRightSide.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
 
+   <div class="bg-black/50 w-full relative z-10 backdrop-filter backdrop-blur-sm p-4 justify-center">
     <h1 class="text-2xl font-bold text-white mb-4 text-center">Food Item Management!</h1>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-8 mt-8">
@@ -119,8 +120,9 @@
 
     </div>
       
-
-    <button class="bg-slate-800 px-6 py-2 rounded-xl shadow-black shadow-2xl active:bg-slate-700" (click)="addItem()">Add New Item</button>
+    <div class="justify-center flex">
+          <button class="bg-slate-800 px-6 py-2 rounded-xl shadow-black shadow-2xl active:bg-slate-700" (click)="addItem()">Add New Item</button>
+    </div>
 
     <div class="mt-8 px-10 pt-5 pb-10 bg-slate-950 rounded-3xl shadow-black shadow-2xl">
       <app-inventory-status></app-inventory-status>
@@ -129,6 +131,7 @@
     <div class="mt-8 px-10 pt-5 pb-10 bg-slate-950 rounded-3xl shadow-black shadow-2xl">   
        <app-best-items></app-best-items>
     </div>
+   </div>
 
   </div>
 </div>

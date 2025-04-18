@@ -50,10 +50,6 @@ export class DashboardComponent {
     this.itemAllItemCountByCategory=await getItemAllItemCountByCategory()
     this.allCustomerCount=await getAllCustomerCount()
     this.allCustomerLoyaltyPoints=await getAllCustomerLoyaltyPoints()
-
-    console.log('====================================');
-    console.log(this.totalRevenueToday);
-    console.log('====================================');
   }
 
   

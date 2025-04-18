@@ -34,7 +34,7 @@ export class SignInFormComponent {
           return response.json();
         })
         .then(result => {
-          if (result === true || result === "true") { // Handle both boolean and string "true"
+          if (result === true || result === "true") {
             Swal.fire('Success!', 'Login successful', 'success');
             this.router.navigate(['navbar']);
           } else {

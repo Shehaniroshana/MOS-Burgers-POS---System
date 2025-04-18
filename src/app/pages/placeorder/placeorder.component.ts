@@ -63,6 +63,8 @@ export class PlaceorderComponent {
     this.loadCustomerIds();
   }
 
+  
+
   search_Item(search_Item: string) {
     if (search_Item != '') {
       this.items = [];

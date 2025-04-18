@@ -11,7 +11,6 @@ export class SignInComponent {
   constructor(private router: Router) {}
 
   signIn() {
-    // Implement sign-in logic here
     console.log('Sign in clicked');
     window.location.href = 'http://localhost:4200/home'; 
    }
