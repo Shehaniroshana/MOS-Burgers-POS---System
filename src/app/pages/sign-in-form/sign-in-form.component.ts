@@ -19,6 +19,7 @@ export class SignInFormComponent {
   togglePassword(): void {
     this.isPasswordVisible = !this.isPasswordVisible;
   }
+
   logIn(email: string, password: string): void {
     console.log(email, password);
   

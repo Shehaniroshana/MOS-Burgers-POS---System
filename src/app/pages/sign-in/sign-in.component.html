@@ -20,8 +20,11 @@
       </div>
   
       <!-- Right Section -->
-      <div class="w-full md:w-2/3 p-8">
-        <router-outlet></router-outlet>
+      <div class="w-full md:w-2/3 h-full rounded-r-2xl"
+      style="background: url('dashboard/orderchart.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+         <div class="bg-black/50 h-full w-full p-8 relative z-10 backdrop-filter backdrop-blur-sm rounded-2xl">
+                  <router-outlet></router-outlet>
+         </div>
       </div>
     </div>
   </div>

@@ -15,13 +15,9 @@
     <tbody>
       <tr *ngFor="let orders of recentOrders" class="border-b border-gray-800 hover:bg-slate-800 transition-colors">
         <td class="p-2">{{orders.customerName}}</td>
-        <td class="p-2 text-red-400">{{orders.totalAmount}}</td>
+        <td class="p-2 text-white">{{orders.totalAmount}}</td>
         <td class="p-2">{{orders.orderDate}}</td>
-        <td class="p-2" [ngClass]="{
-          'text-green-400': orders.status === 'Delivered',
-          'text-blue-400': orders.status === 'Pending',
-          'text-red-400': orders.status === 'Cancelled'
-        }">{{orders.status}}</td>
+        <td class="p-2 text-white">{{orders.status}}</td>
       </tr>
     </tbody>
   </table>

@@ -4,12 +4,13 @@ import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { loadBestCustomers } from '../../Service/DashboardService';
 import { BestCustomersComponent } from "../best-customers/best-customers.component";
+import { RecentOrdersComponent } from "../recent-orders/recent-orders.component";
 
 
 @Component({
   selector: 'app-manage-order',
   standalone: true,
-  imports: [CommonModule, FormsModule, BestCustomersComponent],
+  imports: [CommonModule, FormsModule, BestCustomersComponent, RecentOrdersComponent],
   templateUrl: './manage-order.component.html',
   styleUrls: ['./manage-order.component.css']
 })

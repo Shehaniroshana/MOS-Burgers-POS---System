@@ -8,8 +8,8 @@
     <!-- Search Bar and Category Filter -->
     <div class="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4 mb-6">
       <!-- Search Bar -->
-      <div class="items-center bg-slate-950 rounded-2xl w-full md:w-3/4">
-        <div class="flex items-center space-x-2 p-3 bg-slate-950 rounded-2xl">
+      <div class="items-center bg-slate-900 rounded-2xl w-full md:w-3/4">
+        <div class="flex items-center space-x-2 p-3 bg-slate-900 rounded-2xl">
           <input [(ngModel)]="searchTerm" (ngModelChange)="searchItems()" type="text"
             class="w-full text-white bg-transparent placeholder-gray-400 focus:outline-none"
             placeholder="Search items by name...">
@@ -21,7 +21,7 @@
       <!-- Category Filter -->
       <div class="w-full md:w-1/4">
         <select [(ngModel)]="selectedCategory" (ngModelChange)="filterByCategory()"
-          class="w-full p-[14px] bg-slate-950 text-white rounded-2xl focus:outline-none">
+          class="w-full p-[14px] bg-slate-900 text-white rounded-2xl focus:outline-none">
           <option value="">All Categories</option>
           <option *ngFor="let category of categories" [value]="category" class="bg-slate-800">{{ category }}</option>
         </select>

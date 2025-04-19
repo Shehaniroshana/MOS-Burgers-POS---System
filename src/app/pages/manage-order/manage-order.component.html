@@ -20,8 +20,7 @@
       </div>
 
       <!-- Search result -->
-      <div *ngIf="searchOrderList.length > 0"
-        class="w-full h-40 overflow-y-auto p-4 space-y-5 rounded-b-2xl">
+      <div *ngIf="searchOrderList.length > 0" class="w-full h-40 overflow-y-auto p-4 space-y-5 rounded-b-2xl">
         <div *ngFor="let order of searchOrderList"
           class="bg-slate-950/50  shadow-lg rounded-xl flex items-center w-full p-3 hover:bg-card-hover transition-all duration-300 mt-3">
           <i class="bi bi-cart-check-fill text-[20px]"></i>
@@ -62,79 +61,85 @@
     </div>
 
     <!-- Order List -->
-     <div class="pt-10">
+    <div class="pt-10">
       <div class="flex flex-wrap gap-3 p-3 overflow-y-auto h-[68vh]">
-      <div *ngFor="let order of Orders" class="border border-gray-500 rounded-2xl bg-black/30  shadow-md p-3 w-full max-w-full flex flex-col sm:flex-row gap-3">
-        <!-- Left: Order Summary -->
-        <div class="flex-1 text-gray-300 flex flex-col gap-1">
-          <div class="flex items-center gap-2">
-            <i class="bi bi-receipt text-blue-400 text-sm"></i>
-            <h1 class="text-sm font-bold text-white">ODR#{{order.id}}</h1>
-            <i class="bi bi-person text-blue-400 text-sm"></i>
-            <p class="text-sm">{{order.customerName}}</p>
+        <div *ngFor="let order of Orders"
+          class="border border-gray-500 rounded-2xl bg-black/30  shadow-md p-3 w-full max-w-full flex flex-col sm:flex-row gap-3">
+          <!-- Left: Order Summary -->
+          <div class="flex-1 text-gray-300 flex flex-col gap-1">
+            <div class="flex items-center gap-2">
+              <i class="bi bi-receipt text-blue-400 text-sm"></i>
+              <h1 class="text-sm font-bold text-white">ODR#{{order.id}}</h1>
+              <i class="bi bi-person text-blue-400 text-sm"></i>
+              <p class="text-sm">{{order.customerName}}</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <i class="bi bi-calendar text-blue-400 text-sm"></i>
+              <p class="text-xs text-gray-400">{{order.orderDate}}</p>
+              <p class="text-sm ps-5">Rs.{{order.totalAmount}}</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <ng-container [ngSwitch]="order.status">
+                <i *ngSwitchCase="'Pending'" class="bi bi-clock text-yellow-500 text-sm"></i>
+                <i *ngSwitchCase="'Delivered'" class="bi bi-check-circle text-green-500 text-sm"></i>
+                <i *ngSwitchCase="'Cancelled'" class="bi bi-x-circle text-red-400 text-sm"></i>
+                <i *ngSwitchDefault class="bi bi-question-circle text-gray-400 text-sm"></i>
+              </ng-container>
+
+              <p class="text-xs">{{ order.status }}</p>
+              <i class="bi bi-pencil-square text-[15px] text-emerald-400 hover:text-emerald-500 cursor-pointer"
+                (click)="update_status(order.id,order.status)"></i>
+              <i class="bi bi-trash3-fill text-[15px] text-red-400 hover:text-red-500 cursor-pointer"
+                (click)="delete_order(order.id)"></i>
+            </div>
+
           </div>
-          <div class="flex items-center gap-2">
-            <i class="bi bi-calendar text-blue-400 text-sm"></i>
-            <p class="text-xs text-gray-400">{{order.orderDate}}</p>
-            <p class="text-sm ps-5">Rs.{{order.totalAmount}}</p>
-          </div>
-          <div class="flex items-center gap-2">
-            <ng-container [ngSwitch]="order.status">
-              <i *ngSwitchCase="'Pending'" class="bi bi-clock text-yellow-500 text-sm"></i>
-              <i *ngSwitchCase="'Delivered'" class="bi bi-check-circle text-green-500 text-sm"></i>       
-              <i *ngSwitchCase="'Cancelled'" class="bi bi-x-circle text-red-400 text-sm"></i>      
-              <i *ngSwitchDefault class="bi bi-question-circle text-gray-400 text-sm"></i>
-            </ng-container>
-          
-            <p class="text-xs">{{ order.status }}</p>
-            <i class="bi bi-pencil-square text-[15px] text-emerald-400 hover:text-emerald-500 cursor-pointer" (click)="update_status(order.id,order.status)"></i>
-            <i class="bi bi-trash3-fill text-[15px] text-red-400 hover:text-red-500 cursor-pointer" (click)="delete_order(order.id)"></i>
-          </div>
-          
-        </div>
-        <!-- Right: Item Details -->
-        <div class="flex-1 max-h-20 overflow-y-auto">
-          <div *ngFor="let item of order.itemDetails" class="flex items-center gap-2 py-1 border-t border-gray-400">
-            <img src="{{item.itemImage}}" alt="{{item.itemName}}" class="w-10 h-10 object-cover rounded-full">
-            <div>
-              <p class="text-gray-200 text-xs">{{item.itemName}}</p>
-              <p class="text-gray-400 text-xs">x{{item.quantity}}</p>
+          <!-- Right: Item Details -->
+          <div class="flex-1 max-h-20 overflow-y-auto">
+            <div *ngFor="let item of order.itemDetails" class="flex items-center gap-2 py-1 border-t border-gray-400">
+              <img src="{{item.itemImage}}" alt="{{item.itemName}}" class="w-10 h-10 object-cover rounded-full">
+              <div>
+                <p class="text-gray-200 text-xs">{{item.itemName}}</p>
+                <p class="text-gray-400 text-xs">x{{item.quantity}}</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-     </div>
-    
+
 
   </div>
 
   <!-- Right Side - Order Section -->
   <div class="bg-gray-900 overflow-y-auto w-full md:w-1/3 h-full p-4"
-  style="background: url('bg/orderPageRightSide.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+    style="background: url('bg/orderPageRightSide.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
     <h1 class="text-2xl font-bold text-white mb-4 text-center">Manage Order Details!</h1>
 
 
-    <div class="bg-black/50 w-full h-full relative z-10 backdrop-filter backdrop-blur-sm rounded-2xl p-4">  
+    <div class="bg-black/50 w-full h-full relative z-10 backdrop-filter backdrop-blur-sm rounded-2xl p-4">
       <div class="border border-gray-500 rounded-2xl p-3 mb-4 shadow-md flex justify-between items-center">
-      <div>
-        <h2 class="text-lg font-semibold text-white">Total Orders</h2>
-        <p class="text-gray-300 text-sm">{{activeStatus}}</p>
+        <div>
+          <h2 class="text-lg font-semibold text-white">Total Orders</h2>
+          <p class="text-gray-300 text-sm">{{activeStatus}}</p>
+        </div>
+        <p class="text-xl font-bold text-white">{{Orders.length}}</p>
       </div>
-      <p class="text-xl font-bold text-white">{{Orders.length}}</p>
-    </div>
 
 
 
 
-    <!-- Dashboard Card 5: Best Customers List -->
-    <div class="border border-gray-500 rounded-2xl p-3 mb-4 shadow-md overflow-y-auto h-50">
-      <app-best-customers></app-best-customers>
-    </div>
+      <!-- Dashboard Card 5: Best Customers List -->
+      <div class="border border-gray-500 rounded-2xl p-3 mb-4 shadow-md overflow-y-auto h-50">
+        <app-best-customers></app-best-customers>
+      </div>
 
+      <div class="border-white border p-3 rounded-2xl">
+        <app-recent-orders></app-recent-orders>
+      </div>
     </div>
     <!-- Dashboard Card 1: Total Orders -->
-    
+
 
   </div>
 
